@@ -1,0 +1,4 @@
+package com.example.wordoccurrences;
+
+public @interface BeforeEach {
+}

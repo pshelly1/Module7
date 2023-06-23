@@ -1,0 +1,40 @@
+package com.example.wordoccurrences;
+
+import org.testng.annotations.Test;
+
+import java.io.File;
+
+import static org.testng.AssertJUnit.assertEquals;
+
+public class WordOccurrencesGUITest {
+    private WordOccurrencesGUI wordOccurrencesGUI;
+
+    @BeforeEach
+    void setUp() {
+        wordOccurrencesGUI = new WordOccurrencesGUI();
+    }
+
+    @Test
+    void testReadFile() {
+        File file = new File("path/to/test/file.txt");
+
+        String expectedContent = "This is a test file.";
+        String actualContent = wordOccurrencesGUI.readFile(file);
+
+        assertEquals(expectedContent, actualContent);
+    }
+
+    @Test
+    void testAnalyzeText() {
+        String inputText = "This is a test. Test this.";
+
+        wordOccurrencesGUI.textArea.setText(inputText);
+        wordOccurrencesGUI.analyzeText();
+
+        String[] items = wordOccurrencesGUI.listView.getItems().toArray(new String[0]);
+
+        assertEquals(2, items.length);
+        assertEquals("this: 2", items[0]);
+        assertEquals("test: 2", items[1]);
+    }
+}
